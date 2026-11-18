@@ -2,8 +2,6 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const db = require("./config/db");
-
 const app = express();
 
 // Middleware
@@ -44,15 +42,6 @@ app.use((req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-
-db.getConnection((err, connection) => {
-    if (err) {
-        console.log("Database connection failed:", err.message);
-    } else {
-        console.log("MySQL Database Connected Successfully!");
-        connection.release();
-    }
-});
 
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`ShopEase Server running on port ${PORT}`);
