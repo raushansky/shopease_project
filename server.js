@@ -43,19 +43,17 @@ app.use((req, res) => {
     });
 });
 
-// Start server after database connection
 const PORT = process.env.PORT || 5000;
 
 db.getConnection((err, connection) => {
     if (err) {
         console.log("Database connection failed:", err.message);
-        return;
+    } else {
+        console.log("MySQL Database Connected Successfully!");
+        connection.release();
     }
+});
 
-    console.log("MySQL Database Connected Successfully!");
-    connection.release();
-
-    app.listen(PORT, () => {
-        console.log(`ShopEase Server running on port ${PORT}`);
-    });
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`ShopEase Server running on port ${PORT}`);
 });
