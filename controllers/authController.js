@@ -32,8 +32,9 @@ const register = (req, res) => {
     // Check if email already exists
     userModel.findUserByEmail(userEmail, async (err, result) => {
         if (err) {
-            return sendResponse(res, 500, "Database error");
-        }
+    console.error("Find User Database Error:", err);
+    return sendResponse(res, 500, "Database error");
+}
 
         if (result.length > 0) {
             return sendResponse(res, 409, "Email already registered");
